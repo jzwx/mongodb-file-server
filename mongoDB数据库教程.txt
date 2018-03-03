@@ -1,0 +1,91 @@
+本机操作（方便的自己指令使用）
+mongod -f "E:\mongodb\conf\mongod.conf"
+E:\mongodb-win32-x86_64-3.2.2\bin
+mongo 127.0.0.1:27017/test
+------------------------------------------------------------------
+https://downloads.mongodb.org/win32/mongodb-win32-x86_64-3.2.2.zip
+```
+步骤一:（启动MongoDB服务器）1.在cmd中进入安装目录：F:\mongodb-win32-i386-2.6.6\bin；
+       2.执行开启mongodb服务命令：⑴f: ⑵cd  f:\mongodb-win32-i386-2.6.6\bin 
+       ⑶mongod -dbpath "F:\mongodb\data"
+步骤二:(启动客户端操作MongoDB数据库)1.开启另外一个cmd,【开始】、搜索框输入cmd、回车，开启新        的cmd窗口。输入命令进行测试：⑴f: ⑵cd f:\mongodb-win32-i386-2.6.6\bin ⑶mongo
+       2.开始操作MongoDB数据库。
+
+小结:在安装完成MongoDB时启动服务器可以1.在F盘下新建mongodb文件夹进入到该文件夹分别新建conf,data,log文件夹 2.在conf文件夹中新建mongod.conf配置文件,内容为(1)port = 27017 #MongoDB服务器启动的端口 (2)dbpath = E:\mongodb\data #数据存储目录路径(可以是绝对路径也可以是相对路径) (3)logpath = E:\mongodb\log\mongod.log #MongoDB日志存储路径 3.通过cmd DOS命令进入到 f:\mongodb-win32-i386-2.6.6\bin 文件夹下通过DOS命令启动mongodb服务器,指令为:mongod -f "F:\mongodb\conf\mongod.conf" 这样mongodb服务器就启动好了。
+
+启动对应的mongodb服务器端的数据库对应的客户端
+步骤一: cmd指定进入到 f:\mongodb-win32-i386-2.6.6\bin 文件夹下 使用DOS指令 mongo 127.0.0.1(mongodb服务器ip地址):27017(服务器端口)/test(客户端连接的数据库) 
+
+关闭mongodb服务器指令
+步骤一:连接在127.0.0.1(mongodb服务器ip地址):27017(服务器端口)/test(客户端连接的数据库) 客户端下的cmd窗口下输入 db.shutdownServer() 指令回车即可关闭服务器端mongodb服务器
+
+
+-----------------------------------------------------------------------------------------------------------
+mongodb数据库简单操作指令实战
+show dbs #查看服务器中所有的数据库
+show tables #查看当下数据库中所有的数据表
+use imooc #使用数据库
+db.dropDatabase() #删除数据库
+
+#创建数据库
+use imooc #新建库并使用
+db.imooc_collection.insert({x:1}) #新建imooc_collection表并往表中插入x=1这条数据
+show dbs #查询mongodb服务器中所有的数据库
+
+#查看创建的数据库表
+show collections
+
+#查询数据库表中的数据
+db.imooc_collection.find()
+
+#向表中插入指定_id的数据
+db.imooc_collection.insert({x:3,_id:1})
+
+#从表中查询出满足条件的数据(where x = 1)
+db.imooc_collection.find({x:1})
+
+#用js语法循环向表中插入数据
+for(i=3;i<10;i++)db.imooc_collection.insert({x:i})
+
+#对数据库表中的数据进行统计
+db.imooc_collection.find().count()
+
+#过滤前三条数据(skip()) 并 只查出满足条件的前两条数据(limit()) 并 进行排序(sort())
+db.imooc_collection.find().skip(3).limit(2).sort({x:1})
+
+#表数据更新操作
+db.imooc_collection.update({x:1},{x:999})  #表中x=1的数据更新为x=999
+db.imooc_collection.find({x:999})
+
+#表中数据存储多个字段执行更新操作
+db.imooc_collection.insert({x:100,y:100,z:100})
+db.imooc_collection.update({z:100},{$set:{y:99}}) #表中z=100的那条数据更新为y=99
+db.imooc_collection.find({z:100})
+更新后结果
+{ "_id" : ObjectId("5a8f6c693989bbf2c7b24bce"), "x" : 100, "y" : 99, "z" : 100 }
+
+#更新表中的某条数据,当这条数据不存在则自动往该表中插入这条数据
+db.imooc_collection.update({y:100},{y:999},true)
+db.imooc_collection.find({y:999})
+
+#同时更新表中满足更新条件的多条数据
+db.imooc_collection.insert({c:1}) #插入三条c=1的数据
+db.imooc_collection.update({c:1},{$set:{c:2}},false,true)
+db.imooc_collection.find({c:1}) #不存在
+db.imooc_collection.find({c:2}) #存在3条数据
+
+#删除表中数据（注：删除操作不允许不传参数）
+db.imooc_collection.remove({c:2}) #删除满足条件c=2 的所有数据
+
+#对于某张表进行删除操作
+db.imooc_collection.drop()
+show tables
+
+#创建索引（数据量较大不使用索引数据查询速度较慢）操作
+use imooc
+db.imooc_collection.insert({x:1})
+db.imooc_collection.getIndexes() #查询数据表中的索引
+db.imooc_collection.ensureIndex({x:1}) #创建索引 #x=1 为正向排序 ，x=-1 为逆向排序
+
+```
+

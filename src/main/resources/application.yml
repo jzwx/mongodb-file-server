@@ -1,0 +1,22 @@
+server:
+  address: localhost
+  port: 8081
+
+# Thymeleaf 
+spring:
+  thymeleaf:
+    encoding: UTF-8
+    cache: false
+    mode: HTML5
+# limit upload file size
+  http:
+    multipart:
+      max-file-size: 1024KB
+      max-request-size: 1024KB
+
+# independent MongoDB server
+  data:
+    mongodb:
+      uri: mongodb://jzwx:123456!&@47.107.50.13:27017/test
+#      uri: mongodb://jzwx:123456@localhost:27017/mongotest
+

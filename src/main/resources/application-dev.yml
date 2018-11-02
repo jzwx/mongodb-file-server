@@ -1,6 +1,5 @@
 server:
-  port: 8080
-  address: localhost
+  port: 8081
 
 # Thymeleaf 
 spring:
@@ -20,3 +19,5 @@ spring:
       uri: mongodb://jzwx:123456!&@47.107.50.13:27017/test
 #      uri: mongodb://jzwx:123456@localhost:27017/mongotest
 
+upload:
+  imgURL: 47.107.50.13

@@ -36,7 +36,7 @@ public class FileController {
 	@Autowired
 	private FileService fileService;
 
-	@Value("${server.address}")
+	@Value("${upload.imgURL}")
 	private String serverAddress;
 
 	@Value("${server.port}")

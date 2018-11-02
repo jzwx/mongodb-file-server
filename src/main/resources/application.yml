@@ -1,6 +1,7 @@
 server:
   port: 8081
 
+# Thymeleaf
 spring:
   thymeleaf:
     encoding: UTF-8
@@ -18,9 +19,9 @@ spring:
       uri: mongodb://jzwx:123456!&@47.107.50.13:27017/test
 #      uri: mongodb://jzwx:123456@localhost:27017/mongotest
 
-spring:
-  profiles:
-    active: dev
+#spring:
+#  profiles:
+#    active: dev
 
 upload:
   imgURL: 47.107.50.13

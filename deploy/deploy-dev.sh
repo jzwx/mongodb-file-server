@@ -1,5 +1,5 @@
 APP_DIR=/build/mongodb-file-server/build/libs
-APP_NAME=mongodb-file-server-1.0.0
+APP_NAME=mongodb-file-server-1.0.0-SNAPSHOT
 
 usage() {
     echo "Usage: sh deploy.sh [start|stop|kills]"
@@ -21,7 +21,7 @@ start(){
     #rm -f $APP_DIR/tpid
     #rm -f tpid
     #nohup java -jar xx.jar --spring.profiles.active=dev > /dev/null 2>&1 &
-    nohup java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=80 -jar $APP_DIR/"$APP_NAME".jar --spring.profiles.active=dev > /dev/null 2>&1 &
+    nohup java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000 -jar $APP_DIR/"$APP_NAME".jar --spring.profiles.active=dev > /dev/null 2>&1 &
     #echo $! > tpid
     echo 'Start Success!'
 }
